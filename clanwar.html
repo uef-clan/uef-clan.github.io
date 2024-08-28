@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="clanwarstyle.css">
+    <title>Clan War Status</title>
+</head>
+<body>
+
+  <div class="language-buttons">
+    <button id="englishBtn" class="language-option selected">English</button>
+    <button id="dutchBtn" class="language-option">Nederlands</button>
+</div>
+    <div class="war-status-container">
+        <div class="clan-header">
+            <div>
+                <h2>Clan War Status: <span id="warState">Laden...</span></h2>
+            </div>
+            <div>
+                <img id="clanBadge" src="" alt="Clan Badge">
+                <img id="opponentBadge" src="" alt="Opponent Badge">
+            </div>
+        </div>
+
+        <div class="clan-details">
+            <h3><span id="clanName"></span> (Level <span id="clanLevel"></span>)</h3>
+            <p>Stars: <span id="clanStars"></span> | Attacks: <span id="clanAttacks"></span> | Destruction: <span id="clanDestruction"></span>%</p>
+        </div>
+
+        <div class="opponent-details">
+            <h3>Opponent : <span id="opponentName"></span> (Level <span id="opponentLevel"></span>)</h3>
+            <p>Stars: <span id="opponentStars"></span> | Attacks: <span id="opponentAttacks"></span> | Destruction: <span id="opponentDestruction"></span>%</p>
+        </div>
+
+        <div class="member-list">
+            <h3>www.uef.clan.eu</h3>
+            <ul id="clanMembersList"></ul>
+        </div>
+
+        <div class="member-list">
+            <h3>Opponent</span></h3>
+            <ul id="opponentMembersList"></ul>
+        </div>
+    </div>
+
+    <script src="clanwarscript.js"></script> 
+</body>
+</html>
