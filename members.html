@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>www.uef-clan.eu</title>
+    <link rel="stylesheet" href="membersstyle.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="language-buttons">
+            <button id="englishBtn" class="language-option selected">English</button>
+            <button id="dutchBtn" class="language-option">Nederlands</button>
+        </div>
+        <h1 id="pageTitle">www.uef-clan.eu</h1>
+
+        <select id="clanMembersDropdown">
+            <option value="">Select a Clan Member</option>
+        </select>
+
+        <div class="profile" id="profileSection" style="display: none;">
+            <img id="clanBadge" src="" alt="Clan Badge">
+            <div class="profile-details">
+                <h2 id="playerName">Player Name</h2>
+                <p id="role">Role: Member</p>
+                <p id="trophies">Trophies: 0</p>
+                <p id="leagueName">League: Unknown</p>
+            </div>
+        </div>
+
+        <div class="townhall">
+            <h2 id="townHallTitle"></h2>
+            <img id="townHallImage" src="https://api-assets.clashofclans.com/badges/200/m772uGmnBUU4HX-s-ZNIhFc8UP6JlkeDUT5OTSjNVh4.png" alt="Town Hall">
+        </div>
+    </div>
+
+    <script src="membersscript.js"></script>
+</body>
+</html>

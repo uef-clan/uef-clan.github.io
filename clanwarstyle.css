@@ -98,7 +98,7 @@ body {
     padding: 0 15px;
     transition: font-size 0.3s, color 0.3s;
     font-family: inherit;
-    color: #ffffff;
+    color: #8c8c8c;
 }
 
 .language-option:hover {
