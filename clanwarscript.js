@@ -1,28 +1,9 @@
 let warData = {};
-async function fetchClanWarData() {
-    try {
-        const url = 'https://uef-clan.github.io/uef-data/warResponse.json';
-        
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+let currentLanguage = localStorage.getItem('preferredLanguage') || 'en'; // Load saved language or default to English
 
-        const data = await response.json();
-        warData = data;
-        
-        populateWarDetails();
-    } catch (error) {
-        console.error('Error fetching data from GitHub:', error);
-    }
-}
-fetchClanWarData();
-
-let currentLanguage = 'en';
 const translations = {
     en: {
         comeback: "come back later",
-
         warEnded: "War Ended",
         preparation: "War Preparation",
         warOngoing: "War Ongoing",
@@ -41,7 +22,6 @@ const translations = {
     },
     nl: {
         comeback: "kom later terug",
-
         warEnded: "War Afgelopen",
         preparation: "War Voorbereiding",
         warOngoing: "War Bezig",
@@ -60,7 +40,6 @@ const translations = {
     },
     fin: {
         comeback: "come back later",
-
         warEnded: "War Ended",
         preparation: "War Preparation",
         warOngoing: "War Ongoing",
@@ -79,6 +58,23 @@ const translations = {
     }
 };
 
+async function fetchClanWarData() {
+    try {
+        const url = 'https://uef-clan.github.io/uef-data/warResponse.json';
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        warData = data;
+        
+        populateWarDetails();
+    } catch (error) {
+        console.error('Error fetching data from GitHub:', error);
+    }
+}
 
 function populateWarDetails() {
     const lang = translations[currentLanguage];
@@ -116,7 +112,6 @@ function populateWarDetails() {
     populateMemberList(warData.clan.members, 'clanMembersList');
     populateMemberList(warData.opponent?.members || [], 'opponentMembersList');
 }
-
 
 function populateMemberList(members, listId) {
     const list = document.getElementById(listId);
@@ -171,6 +166,7 @@ function populateMemberList(members, listId) {
 
 function toggleLanguage(language) {
     currentLanguage = language;
+    localStorage.setItem('preferredLanguage', language); // Save the selected language
 
     document.getElementById('englishBtn').classList.toggle('selected', language === 'en');
     document.getElementById('dutchBtn').classList.toggle('selected', language === 'nl');
@@ -178,7 +174,10 @@ function toggleLanguage(language) {
     populateWarDetails();
 }
 
+// Set event listeners for language buttons
 document.getElementById('englishBtn').addEventListener('click', () => toggleLanguage('en'));
 document.getElementById('dutchBtn').addEventListener('click', () => toggleLanguage('nl'));
 
-populateWarDetails();
+// Fetch war data and apply the saved or default language on page load
+fetchClanWarData();
+toggleLanguage(currentLanguage);

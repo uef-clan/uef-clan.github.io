@@ -1,7 +1,5 @@
-// misschien geolocation checken om te zien als een nederlander de site bekijkt
-// en automatisch de site nederlsands zet
-// prioriteit: laag
-let currentLanguage = 'en';
+let currentLanguage = localStorage.getItem('preferredLanguage') || 'en'; // Load saved language or default to English
+
 const translations = {
     en: {
         siteTitle: "www.uef-clan.eu",
@@ -25,8 +23,9 @@ const translations = {
     }
 };
 
-function setLanguage(language) {
+function toggleLanguage(language) {
     currentLanguage = language;
+    localStorage.setItem('preferredLanguage', language); // Save the selected language
     const translation = translations[language];
 
     document.getElementById('siteTitle').textContent = translation.siteTitle;
@@ -42,7 +41,7 @@ function setLanguage(language) {
     document.getElementById('dutchBtn').classList.toggle('selected', language === 'nl');
 }
 
-document.getElementById('englishBtn').addEventListener('click', () => setLanguage('en'));
-document.getElementById('dutchBtn').addEventListener('click', () => setLanguage('nl'));
+document.getElementById('englishBtn').addEventListener('click', () => toggleLanguage('en'));
+document.getElementById('dutchBtn').addEventListener('click', () => toggleLanguage('nl'));
 
-setLanguage(currentLanguage);
+toggleLanguage(currentLanguage);

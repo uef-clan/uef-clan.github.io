@@ -72,7 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdown = document.getElementById("clanMembersDropdown");
     dropdown.addEventListener("change", handleDropdownChange);
 
-    toggleLanguage('en');
+    const savedLanguage = localStorage.getItem('preferredLanguage');
+    if (savedLanguage) {
+        toggleLanguage(savedLanguage);
+    } else {
+        toggleLanguage('en');
+    }
 });
 
 const townHalls = [
@@ -117,6 +122,7 @@ let currentLanguage = 'en';
 
 function toggleLanguage(language) {
     currentLanguage = language;
+    localStorage.setItem('preferredLanguage', language);
     document.getElementById('englishBtn').classList.toggle('selected', language === 'en');
     document.getElementById('dutchBtn').classList.toggle('selected', language === 'nl');
 
@@ -132,7 +138,6 @@ function toggleLanguage(language) {
     document.getElementById('leagueName').textContent = `${lang.leagueName}: ${selectedMember ? selectedMember.league.name : ''}`;
     document.getElementById('townHallTitle').textContent = lang.townHallTitle;
 }
-
 document.getElementById('englishBtn').addEventListener('click', () => toggleLanguage('en'));
 document.getElementById('dutchBtn').addEventListener('click', () => toggleLanguage('nl'));
 
