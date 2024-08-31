@@ -23,7 +23,7 @@ const translations = {
         opponentDestruction: "Destruction",
         attack: "Attack",
         bestOpponentAttack: "Best Opponent Attack",
-        noAttack: "Not Attack",
+        noAttack: "No Attack",
         goBack: "Go Back"
     },
     nl: {
