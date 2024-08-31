@@ -106,7 +106,8 @@ const translations = {
         trophies: "Trophies",
         leagueName: "League",
         townHallTitle: "Town Hall",
-        roles: ['Elder', 'Co-Leader', 'Leader', 'Member', 'oops']
+        roles: ['Elder', 'Co-Leader', 'Leader', 'Member', 'oops'],
+        goBack: "Go Back"
     },
     nl: {
         selectMember: "Selecteer een Clan Lid",
@@ -114,7 +115,8 @@ const translations = {
         trophies: "Trofeeën",
         leagueName: "Klasse",
         townHallTitle: "Stadhuis",
-        roles: ['Oudste', 'Co-Leider', 'Leider', 'Lid', 'oeps']
+        roles: ['Oudste', 'Co-Leider', 'Leider', 'Lid', 'oeps'],
+        goBack: "Terug"
     }
 };
 
@@ -125,6 +127,7 @@ function toggleLanguage(language) {
     localStorage.setItem('preferredLanguage', language);
     document.getElementById('englishBtn').classList.toggle('selected', language === 'en');
     document.getElementById('dutchBtn').classList.toggle('selected', language === 'nl');
+    document.getElementById("goBackBtn").textContent = translations[currentLanguage].goBack;
 
     const lang = translations[currentLanguage];
     document.querySelector('#clanMembersDropdown option').textContent = lang.selectMember;

@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="membersstyle.css">
 </head>
 <body>
-
     <div class="container">
-        <div class="language-buttons">
-            <button id="englishBtn" class="language-option selected">English</button>
-            <button id="dutchBtn" class="language-option">Nederlands</button>
+        <div class="top-bar">
+            <button id="goBackBtn" class="top-bar-button"></button>
+            <div class="language-buttons">
+                <button id="englishBtn" class="language-option selected">English</button>
+                <button id="dutchBtn" class="language-option">Nederlands</button>
+            </div>
         </div>
         <h1 id="pageTitle">www.uef-clan.eu</h1>
 
@@ -34,6 +36,10 @@
             <img id="townHallImage" src="https://api-assets.clashofclans.com/badges/200/m772uGmnBUU4HX-s-ZNIhFc8UP6JlkeDUT5OTSjNVh4.png" alt="Town Hall">
         </div>
     </div>
+
+    <script>
+        document.getElementById('goBackBtn').addEventListener('click', () => { window.location.href = 'index.html';});
+    </script>
 
     <script src="membersscript.js"></script>
 </body>

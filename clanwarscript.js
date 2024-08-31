@@ -1,5 +1,9 @@
 let warData = {};
-let currentLanguage = localStorage.getItem('preferredLanguage') || 'en'; // Load saved language or default to English
+let currentLanguage = localStorage.getItem('preferredLanguage') || 'en';
+
+document.getElementById('goBackBtn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 
 const translations = {
     en: {
@@ -15,10 +19,12 @@ const translations = {
         opponentName: "Opponent Name",
         opponentLevel: "Opponent Level",
         opponentStars: "Stars",
-        opponentAttacks: "Attacks",
+        opponentAttacks: "Attacked by opponent",
         opponentDestruction: "Destruction",
         attack: "Attack",
         bestOpponentAttack: "Best Opponent Attack",
+        noAttack: "Not Attack",
+        goBack: "Go Back"
     },
     nl: {
         comeback: "kom later terug",
@@ -33,29 +39,13 @@ const translations = {
         opponentName: "Tegenstander Naam",
         opponentLevel: "Tegenstander Niveau",
         opponentStars: "Sterren",
-        opponentAttacks: "Aanvallen",
+        opponentAttacks: "Aangevallen door tegenstander",
         opponentDestruction: "Verwoesting",
         attack: "Aanval",
         bestOpponentAttack: "Beste Tegenstander Aanval",
+        noAttack: "Nog Niet Aangevallen",
+        goBack: "Terug"
     },
-    fin: {
-        comeback: "come back later",
-        warEnded: "War Ended",
-        preparation: "War Preparation",
-        warOngoing: "War Ongoing",
-        clanName: "Clan Name",
-        clanLevel: "Clan Level",
-        clanStars: "Stars",
-        clanAttacks: "Attacks",
-        clanDestruction: "Destruction",
-        opponentName: "Opponent Name",
-        opponentLevel: "Opponent Level",
-        opponentStars: "Stars",
-        opponentAttacks: "Attacks",
-        opponentDestruction: "Destruction",
-        attack: "Attack",
-        bestOpponentAttack: "Best Opponent Attack",
-    }
 };
 
 async function fetchClanWarData() {
@@ -78,10 +68,9 @@ async function fetchClanWarData() {
 
 function populateWarDetails() {
     const lang = translations[currentLanguage];
-
+    document.getElementById("goBackBtn").textContent = lang.goBack;
     if (!warData.state || warData.state.toLowerCase() === "preparation") {
         document.getElementById('warState').textContent = `${lang.preparation}, ${lang.comeback}`;
-
         document.getElementById('clanBadge').src = warData.clan.badgeUrls?.medium || '';
         document.getElementById('opponentBadge').src = warData.opponent?.badgeUrls?.medium || '';
 
@@ -122,6 +111,7 @@ function populateMemberList(members, listId) {
     members.forEach(member => {
         const listItem = document.createElement('li');
 
+
         const memberSummary = `
             <div class="member-summary">
                 <strong>${member.name}</strong> (TH ${member.townhallLevel})
@@ -130,7 +120,7 @@ function populateMemberList(members, listId) {
 
         let attackDetails = '';
         const lang = translations[currentLanguage];
-        if (member.attacks) {
+        if (member.attacks && member.attacks.length > 0) {
             member.attacks.forEach((attack, index) => {
                 attackDetails += `
                     <div class="attack-details">
@@ -138,23 +128,34 @@ function populateMemberList(members, listId) {
                     </div>
                 `;
             });
+        } else {
+            attackDetails = `
+                <div class="attack-details">
+                    <p><strong>${lang.attack}:</strong> ${lang.noAttack}</p>
+                </div>
+            `;
         }
 
-        const bestOpponentAttack = `
+        const bestOpponentAttack = member.bestOpponentAttack ? `
             <div class="attack-details">
                 <p><strong>${lang.bestOpponentAttack}:</strong> ${member.bestOpponentAttack.stars} ${lang.clanStars}, ${member.bestOpponentAttack.destructionPercentage}% ${lang.clanDestruction}</p>
+            </div>
+        ` : `
+            <div class="attack-details">
+                <p><strong>${lang.bestOpponentAttack}:</strong> ${lang.noAttack}</p>
             </div>
         `;
 
         const memberDetails = `
             <div class="member-details">
-                <p>${lang.opponentAttacks}: ${member.opponentAttacks}</p>
+                <p>${lang.opponentAttacks}: ${member.opponentAttacks || '0'}</p>
                 ${attackDetails}
                 ${bestOpponentAttack}
             </div>
         `;
 
         listItem.innerHTML = memberSummary + memberDetails;
+
         listItem.addEventListener('click', () => {
             const details = listItem.querySelector('.member-details');
             details.classList.toggle('expanded');
@@ -164,9 +165,10 @@ function populateMemberList(members, listId) {
     });
 }
 
+
 function toggleLanguage(language) {
     currentLanguage = language;
-    localStorage.setItem('preferredLanguage', language); // Save the selected language
+    localStorage.setItem('preferredLanguage', language);
 
     document.getElementById('englishBtn').classList.toggle('selected', language === 'en');
     document.getElementById('dutchBtn').classList.toggle('selected', language === 'nl');
@@ -174,10 +176,9 @@ function toggleLanguage(language) {
     populateWarDetails();
 }
 
-// Set event listeners for language buttons
+
 document.getElementById('englishBtn').addEventListener('click', () => toggleLanguage('en'));
 document.getElementById('dutchBtn').addEventListener('click', () => toggleLanguage('nl'));
 
-// Fetch war data and apply the saved or default language on page load
 fetchClanWarData();
 toggleLanguage(currentLanguage);
