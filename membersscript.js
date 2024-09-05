@@ -2,7 +2,7 @@ const clanData = {};
 
 async function fetchMembers() {
     try {
-        const url = 'https://uef-clan.github.io/uef-data/response.json';
+        const url = 'https://raw.githubusercontent.com/uef-clan/uef-data/main/response.json';
         
         const response = await fetch(url);
         if (!response.ok) {

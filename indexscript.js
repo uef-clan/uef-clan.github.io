@@ -3,7 +3,7 @@ let currentLanguage = localStorage.getItem('preferredLanguage') || 'en';
 const translations = {
     en: {
         siteTitle: "www.uef-clan.eu",
-        siteDescription: "Active on Clash of Clans, Clash Royale and Brawl Stars",
+        siteDescription: "Active at Clash of Clans, Clash Royale and Brawl Stars",
         infoTitle: "About Us",
         newsTitle: "Latest News",
         newsHeadline: "Website Relaunch!",

@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="indexstyle.css">
     <title>UEF Clan</title>
+    <link rel="icon" type="image/x-icon" href="https://api-assets.clashofclans.com/badges/200/m772uGmnBUU4HX-s-ZNIhFc8UP6JlkeDUT5OTSjNVh4.png"> 
+    <meta name="twitter:site" content="@twitter_handle">
+    <meta name="twitter:title" content="uef-clan.eu">
+    <meta name="twitter:description" content="UEF Clan">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://api-assets.clashofclans.com/badges/200/m772uGmnBUU4HX-s-ZNIhFc8UP6JlkeDUT5OTSjNVh4.png">
+
+    <meta content="#ede1d3" data-react-helmet="true" name="theme-color" />
 </head>
 <body>
 
@@ -14,26 +22,34 @@
             <button id="englishBtn" class="language-option selected">English</button>
             <button id="dutchBtn" class="language-option">Nederlands</button>
         </div>
-
+    
         <header class="header">
             <div class="logo">
                 <img src="https://api-assets.clashofclans.com/badges/200/m772uGmnBUU4HX-s-ZNIhFc8UP6JlkeDUT5OTSjNVh4.png" alt="Clan Logo">
             </div>
             <h1 id="siteTitle">www.uef-clan.eu</h1>
-            <p id="siteDescription">Active on Clash of Clans, Clash Royale and Brawl Stars</p>
+            <p id="siteDescription">Active at Clash of Clans, Clash Royale and Brawl Stars</p>
         </header>
 
-        <nav class="navigation">
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        
+        <div class="menu" id="menu">
             <button class="nav-button" onclick="window.location.href='clanwar.html'">Clan War Status</button>
             <button class="nav-button" onclick="window.location.href='members.html'">Members</button>
-        </nav>
+        </div>
+        
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
         <section class="info-section">
             <h2 id="infoTitle">About Us</h2>
             <p id="infoParagraph1"></p>
             <p id="infoParagraph2"></p>
         </section>
-
+    
         <section class="news-section">
             <h2 id="newsTitle">Latest News</h2>
             <div class="news-item">
@@ -42,7 +58,18 @@
             </div>
         </section>
     </div>
+    <script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    const overlay = document.getElementById('overlay');
+    const hamburger = document.querySelector('.hamburger');
 
+    menu.classList.toggle('open');
+    overlay.classList.toggle('show');
+    hamburger.classList.toggle('open');
+}
+    </script>
+    
     <script src="indexscript.js"></script>
 </body>
 </html>

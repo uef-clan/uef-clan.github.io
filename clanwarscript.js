@@ -24,7 +24,8 @@ const translations = {
         attack: "Attack",
         bestOpponentAttack: "Best Opponent Attack",
         noAttack: "No Attack",
-        goBack: "Go Back"
+        goBack: "Go Back",
+        notInWar: "Currently not in War"
     },
     nl: {
         comeback: "kom later terug",
@@ -44,13 +45,14 @@ const translations = {
         attack: "Aanval",
         bestOpponentAttack: "Beste Tegenstander Aanval",
         noAttack: "Nog Niet Aangevallen",
-        goBack: "Terug"
+        goBack: "Terug",
+        notInWar: "Geen War op dit moment"
     },
 };
 
 async function fetchClanWarData() {
     try {
-        const url = 'https://uef-clan.github.io/uef-data/warResponse.json';
+        const url = 'https://raw.githubusercontent.com/uef-clan/uef-data/main/warResponse.json';
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -67,17 +69,43 @@ async function fetchClanWarData() {
 }
 
 function populateWarDetails() {
+    
     const lang = translations[currentLanguage];
     document.getElementById("goBackBtn").textContent = lang.goBack;
-    if (!warData.state || warData.state.toLowerCase() === "preparation") {
+
+    if (warData.state.toLowerCase() === "preparation") {
         document.getElementById('warState').textContent = `${lang.preparation}, ${lang.comeback}`;
-        document.getElementById('clanBadge').src = warData.clan.badgeUrls?.medium || '';
+
+        document.getElementById('clanBadge').src = warData.clan?.badgeUrls?.medium || '';
         document.getElementById('opponentBadge').src = warData.opponent?.badgeUrls?.medium || '';
 
         document.getElementById('clanName').textContent = warData.clan.name;
         document.getElementById('clanLevel').textContent = `${lang.clanLevel} ${warData.clan.clanLevel}`;
         document.getElementById('opponentName').textContent = warData.opponent?.name || '';
         document.getElementById('opponentLevel').textContent = `${lang.opponentLevel}: ${warData.opponent?.clanLevel || ''}`;
+
+        return;
+    }
+
+    if (warData.state.toLowerCase() === "notinwar") {
+        document.getElementById('warState').textContent = `${lang.notInWar}, ${lang.comeback}`;
+
+        document.getElementById('clanBadge').src = '';
+        document.getElementById('opponentBadge').src = '';
+
+        document.getElementById('clanName').textContent = '';
+        document.getElementById('clanLevel').textContent = '';
+        document.getElementById('opponentName').textContent = '';
+        document.getElementById('opponentLevel').textContent = '';
+        document.getElementById('clanStars').textContent = '';
+        document.getElementById('clanAttacks').textContent = '';
+        document.getElementById('clanDestruction').textContent = '';
+        document.getElementById('opponentStars').textContent = '';
+        document.getElementById('opponentAttacks').textContent = '';
+        document.getElementById('opponentDestruction').textContent = '';
+
+        document.getElementById('clanMembersList').innerHTML = '';
+        document.getElementById('opponentMembersList').innerHTML = '';
 
         return;
     }
@@ -101,6 +129,7 @@ function populateWarDetails() {
     populateMemberList(warData.clan.members, 'clanMembersList');
     populateMemberList(warData.opponent?.members || [], 'opponentMembersList');
 }
+
 
 function populateMemberList(members, listId) {
     const list = document.getElementById(listId);
@@ -172,8 +201,9 @@ function toggleLanguage(language) {
 
     document.getElementById('englishBtn').classList.toggle('selected', language === 'en');
     document.getElementById('dutchBtn').classList.toggle('selected', language === 'nl');
-
-    populateWarDetails();
+    if (Object.keys(warData).length > 0) {
+        populateWarDetails();
+    }
 }
 
 

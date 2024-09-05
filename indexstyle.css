@@ -65,27 +65,90 @@ body {
     color: #cccccc;
 }
 
-.navigation {
+.hamburger {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1000;
     display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.nav-button {
+.hamburger div {
+    width: 100%;
+    height: 4px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger.open div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open div:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open div:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.menu {
+    position: fixed;
+    right: -250px;
+    top: 0;
+    height: 100%;
+    width: 250px;
     background-color: #333;
-    border: 2px solid #444;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 80px;
+    transition: right 0.3s ease;
+    z-index: 999;
+}
+
+.menu .nav-button {
+    background-color: #444;
+    border: none;
     color: #ffa500;
-    padding: 10px 20px;
-    margin: 0 10px;
+    padding: 15px;
+    text-align: left;
+    width: 100%;
     font-size: 18px;
-    border-radius: 5px;
     cursor: pointer;
+    border-bottom: 1px solid #555;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav-button:hover {
+.menu .nav-button:hover {
     background-color: #ffa500;
     color: #ffffff;
+}
+
+.menu.open {
+    right: 0;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+.overlay.show {
+    display: block;
 }
 
 .info-section, .news-section {
