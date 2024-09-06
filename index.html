@@ -17,7 +17,6 @@
 <body>
 
     <div class="homepage-container">
-
         <div class="language-buttons">
             <button id="englishBtn" class="language-option selected">English</button>
             <button id="dutchBtn" class="language-option">Nederlands</button>
@@ -40,6 +39,8 @@
         <div class="menu" id="menu">
             <button class="nav-button" onclick="window.location.href='clanwar.html'">Clan War Status</button>
             <button class="nav-button" onclick="window.location.href='members.html'">Members</button>
+            <h3>Members Only</h3>
+            <button class="nav-button" onclick="window.location.href='/ClanOnly'">Clan Info</button>
         </div>
         
         <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
@@ -58,6 +59,7 @@
             </div>
         </section>
     </div>
+
     <script>
         function toggleMenu() {
             const menu = document.getElementById('menu');
