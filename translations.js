@@ -62,7 +62,7 @@ const translations = {
         informationTitle: "Line Chat",
         infoContent: `
             <strong>Contact:</strong> We communiceren via Line Chat, dit gaat makkelijker dan de ingame chat. Ook kun je hier screenshots van dorpen delen bijvoorbeeld. Voeg het ID: uef-frankman toe aan je Line en je wordt aan de Clash of Clans groep toegevoegd<br>
-            <a href=''>Klik hier om Line chat te downloaden.</a>
+            <a href='https://line.me/'>Klik hier om Line chat te downloaden.</a>
         `,
         goBack: "Terug"
     }
