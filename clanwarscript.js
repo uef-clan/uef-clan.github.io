@@ -2,7 +2,7 @@ let warData = {};
 let currentLanguage = localStorage.getItem('preferredLanguage') || 'en';
 
 document.getElementById('goBackBtn').addEventListener('click', () => {
-    window.location.href = 'index.html';
+    window.location.href = '/';
 });
 
 const translations = {
