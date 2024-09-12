@@ -76,13 +76,22 @@ function populateWarDetails() {
     if (warData.state.toLowerCase() === "preparation") {
         document.getElementById('warState').textContent = `${lang.preparation}, ${lang.comeback}`;
 
-        document.getElementById('clanBadge').src = warData.clan?.badgeUrls?.medium || '';
+        document.getElementById('clanBadge').src = warData.clan.badgeUrls?.medium || '';
         document.getElementById('opponentBadge').src = warData.opponent?.badgeUrls?.medium || '';
-
+    
         document.getElementById('clanName').textContent = warData.clan.name;
         document.getElementById('clanLevel').textContent = `${lang.clanLevel} ${warData.clan.clanLevel}`;
+        document.getElementById('clanStars').textContent = `${lang.clanStars}: ${warData.clan.stars}`;
+        document.getElementById('clanAttacks').textContent = `${lang.clanAttacks}: ${warData.clan.attacks}`;
+        document.getElementById('clanDestruction').textContent = `${lang.clanDestruction}: ${warData.clan.destructionPercentage.toFixed(2)}`;
         document.getElementById('opponentName').textContent = warData.opponent?.name || '';
         document.getElementById('opponentLevel').textContent = `${lang.opponentLevel}: ${warData.opponent?.clanLevel || ''}`;
+        document.getElementById('opponentStars').textContent = `${lang.opponentStars}: ${warData.opponent?.stars || ''}`;
+        document.getElementById('opponentAttacks').textContent = `${lang.clanAttacks}: ${warData.opponent?.attacks || ''}`;
+        document.getElementById('opponentDestruction').textContent = `${lang.opponentDestruction}: ${warData.opponent?.destructionPercentage?.toFixed(2) || ''}`;
+    
+        populateMemberList(warData.clan.members, 'clanMembersList');
+        populateMemberList(warData.opponent?.members || [], 'opponentMembersList');
 
         return;
     }
@@ -119,12 +128,12 @@ function populateWarDetails() {
     document.getElementById('clanLevel').textContent = `${lang.clanLevel} ${warData.clan.clanLevel}`;
     document.getElementById('clanStars').textContent = `${lang.clanStars}: ${warData.clan.stars}`;
     document.getElementById('clanAttacks').textContent = `${lang.clanAttacks}: ${warData.clan.attacks}`;
-    document.getElementById('clanDestruction').textContent = `${lang.clanDestruction}: ${warData.clan.destructionPercentage.toFixed(2)}%`;
+    document.getElementById('clanDestruction').textContent = `${lang.clanDestruction}: ${warData.clan.destructionPercentage.toFixed(2)}`;
     document.getElementById('opponentName').textContent = warData.opponent?.name || '';
     document.getElementById('opponentLevel').textContent = `${lang.opponentLevel}: ${warData.opponent?.clanLevel || ''}`;
     document.getElementById('opponentStars').textContent = `${lang.opponentStars}: ${warData.opponent?.stars || ''}`;
     document.getElementById('opponentAttacks').textContent = `${lang.opponentAttacks}: ${warData.opponent?.attacks || ''}`;
-    document.getElementById('opponentDestruction').textContent = `${lang.opponentDestruction}: ${warData.opponent?.destructionPercentage?.toFixed(2) || ''}%`;
+    document.getElementById('opponentDestruction').textContent = `${lang.opponentDestruction}: ${warData.opponent?.destructionPercentage?.toFixed(2) || ''}`;
 
     populateMemberList(warData.clan.members, 'clanMembersList');
     populateMemberList(warData.opponent?.members || [], 'opponentMembersList');
