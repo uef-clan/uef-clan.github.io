@@ -20,14 +20,29 @@ async function fetchMembers() {
 }
 
 function populateDropdown() {
+    const rolePriority = {
+        'Leader': 1,
+        'Co-Leader': 2,
+        'Elder': 3,
+        'Member': 4
+    };
+
     const dropdown = document.getElementById("clanMembersDropdown");
     dropdown.innerHTML = '';
+
+    clanData.memberList.sort((a, b) => {
+        const roleA = translations[currentLanguage].roles[a.role];
+        const roleB = translations[currentLanguage].roles[b.role];
+        return rolePriority[roleA] - rolePriority[roleB];
+    });
+
     clanData.memberList.forEach(member => {
         const option = document.createElement("option");
         option.value = member.tag;
         option.textContent = member.name;
         dropdown.appendChild(option);
     });
+
     dropdown.insertAdjacentHTML('afterbegin', `<option value="">${translations[currentLanguage].selectMember}</option>`);
     dropdown.selectedIndex = "0";
 }
