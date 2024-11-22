@@ -6,16 +6,16 @@ const translations = {
         siteDescription: "Active at Clash of Clans, Clash Royale and Brawl Stars",
         infoTitle: "About Us",
         newsTitle: "Latest News",
-        newsHeadline: "Website Relaunch!",
-        newsContent: "The uef-clan website is back online!",
+        newsHeadline: "Clan Games",
+        newsContent: "The clan games started again! Try to earn as much points as possible so we can get all the rewards. If you earn 4000 points (the max) then you can choose and extra bonus reward!",
     },
     nl: {
         siteTitle: "www.uef-clan.eu",
         siteDescription: "Actief op Clash of Clans, Clash Royale en Brawl Stars",
         infoTitle: "Over ons",
         newsTitle: "Laatste nieuws",
-        newsHeadline: "Website Herlancering!",
-        newsContent: "De uef-clan website staat weer online!",
+        newsHeadline: "Clan Spelen",
+        newsContent: "De clan spelen zijn weer begonnen! Probeer zoveel mogelijk punten te halen zodat we alle rewards kunnen krijgen. Als je 4000 punten haalt (de max) mag je een extra beloning kiezen!",
     }
 };
 
